@@ -22,13 +22,24 @@ function App() {
     setTitle("")
   }
 
+  function deleteArticle(i) {
+    const updatedArticles = articles.filter((article, index) => index !== i)
+    setArticles(updatedArticles)
+  }
+
   return (
     <>
       <div className="container">
         <h1 className='py-3'>Articles</h1>
         <ul className='list-group'>
           {articles.map((article, index) => (
-            <li className='list-group-item border-secondary-subtle' key={index + article.replaceAll(" ", "-").toLowerCase()}>{article}</li>
+            <li className='list-group-item border-secondary-subtle d-flex justify-content-between align-items-center' key={index + article.replaceAll(" ", "-").toLowerCase()}>
+              <span>{article}</span>
+              <button className='btn btn-secondary btn-sm d-flex justify-content-center align-items-center'
+                onClick={() => deleteArticle(index)}>
+                <i className='bi bi-trash'></i>
+              </button>
+            </li>
           ))}
         </ul>
 
