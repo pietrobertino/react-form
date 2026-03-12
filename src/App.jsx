@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import AppArticles from './assets/components/AppArticles';
+import AppRenameForm from './assets/components/AppRenameForm';
+import AppAddForm from './assets/components/AppAddForm';
 
 const initialArticles = [
   "Guida al Coding",
@@ -52,44 +55,16 @@ function App() {
   return (
     <>
       <div className="container">
-        <h1 className='py-3'>Articles</h1>
-        <ul className='list-group'>
-          {articles.map((article, index) => (
-            <li className='list-group-item border-secondary-subtle d-flex justify-content-between align-items-center' key={index + article.replaceAll(" ", "-").toLowerCase()}>
-              <span>
-                {article}
-              </span>
-              <div className='d-flex gap-1'>
-                <button className='btn btn-secondary btn-sm d-flex justify-content-center align-items-center'
-                  onClick={() => (setRewrite(index), setTitle(article))}>
-                  <i className='bi bi-pen'></i>
-                </button>
-                <button className='btn btn-secondary btn-sm d-flex justify-content-center align-items-center'
-                  onClick={() => deleteArticle(index)}>
-                  <i className='bi bi-trash'></i>
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <AppArticles articles={articles} setRewrite={setRewrite} setTitle={setTitle} deleteArticle={deleteArticle} />
 
         {
           rewrite >= 0 ?
 
-            <form onSubmit={modifyArticle} className='text-center'>
-              <input type="text" value={title} onChange={e => setTitle(e.target.value)} className='form-control
-              mt-4 border-warning-subtle'/>
-              <button type='submit' className='btn btn-warning mt-2'>Rename article</button>
-            </form>
+            <AppRenameForm title={title} setTitle={setTitle} modifyArticle={modifyArticle} />
 
             :
 
-            <form onSubmit={handleSubmit} className='text-center'>
-              <input type="text" value={title}
-                onChange={e => setTitle(e.target.value)} className=' form-control mt-4 border-secondary-subtle'
-                placeholder='Type here the title of the new article...' />
-              <button type='submit' className='btn btn-primary mt-2'>Upload new article</button>
-            </form>
+            <AppAddForm handleSubmit={handleSubmit} title={title} setTitle={setTitle} />
         }
 
       </div>
