@@ -25,16 +25,18 @@ function App() {
   return (
     <>
       <div className="container">
-        <ul>
+        <h1 className='py-3'>Articles</h1>
+        <ul className='list-group'>
           {articles.map((article, index) => (
-            <li key={index + article.replaceAll(" ", "-").toLowerCase()}>{article}</li>
+            <li className='list-group-item border-secondary-subtle' key={index + article.replaceAll(" ", "-").toLowerCase()}>{article}</li>
           ))}
         </ul>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='text-center'>
           <input type="text" value={title}
-            onChange={e => setTitle(e.target.value)} />
-          <button type='submit'>Upload</button>
+            onChange={e => setTitle(e.target.value)} className=' form-control mt-4 border-secondary-subtle'
+            placeholder='Type here the title of the new article...' />
+          <button type='submit' className='btn btn-primary mt-2'>Upload new article</button>
         </form>
       </div>
     </>
