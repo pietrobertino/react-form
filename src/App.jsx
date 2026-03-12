@@ -19,8 +19,10 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
     //dobbiamo modificare ed aggiornare la lista
-    setArticles([...articles, title])
-    setTitle("")
+    if (title.length > 0) {
+      setArticles([...articles, title])
+      setTitle("")
+    }
   }
 
   function deleteArticle(i) {
@@ -31,18 +33,20 @@ function App() {
   function modifyArticle(e) {
     e.preventDefault()
 
-    const updatedArticles = articles.map((article, index) => {
-      if (index == rewrite) {
-        return title
-      }
-      else {
-        return article
-      }
-    })
+    if (title.length > 0) {
+      const updatedArticles = articles.map((article, index) => {
+        if (index == rewrite) {
+          return title
+        }
+        else {
+          return article
+        }
+      })
 
-    setTitle("")
-    setArticles(updatedArticles)
-    setRewrite(-1)
+      setTitle("")
+      setArticles(updatedArticles)
+      setRewrite(-1)
+    }
   }
 
   return (
